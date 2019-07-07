@@ -55,3 +55,28 @@ public:
         return endlen;
     }
 };
+
+--------------------------------------------------------
+//new code
+/*
+力扣上面最优解法
+优化的滑动窗口：当发现一个重复的字符时，滑动窗口的左索引i直接跳到前一个相同字符的下一个位置，而不是i++
+*/
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+    int n = s.length();
+        map<char, int> Map_tmp;
+        map<char, int>::iterator iter; 
+        int i= 0, ans = 0;
+        
+        for(int j = 0; j<n; j++){
+           if( (iter = Map_tmp.find(s[j])) != Map_tmp.end() ){
+               i = max(i, iter->second);
+           } 
+            ans = max(ans, j-i+1);
+            Map_tmp[(s[j])] = j+1;
+        }
+        return ans;
+    }
+};
