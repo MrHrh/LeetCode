@@ -42,3 +42,28 @@ public:
         return ret;
     }
 };
+
+
+
+-------------------------------------------------------------
+//最优解，官方解答
+class Solution {
+public:
+    int reverse(int x) {
+        int ret = 0;
+        while (x != 0) {
+            //取余数
+            int pop = x % 10;
+            x /= 10;
+            //最大32位有符号整数的最后一位是7
+            if (ret > INT_MAX/10 || (ret == INT_MAX / 10 && pop > 7)) return 0;
+            //最小32位有符号整数最后一位是8（负数，所以是-8）
+            if (ret < INT_MIN/10 || (ret == INT_MIN / 10 && pop < -8)) return 0;
+            ret = ret * 10 + pop;
+        }
+        return ret;
+    }
+};
+
+
+//差距是真的大，，，，，，，，，
