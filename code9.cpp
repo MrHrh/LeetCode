@@ -14,7 +14,7 @@
 解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。
 */
 
--------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
 
 //code
 //自己解法
@@ -38,5 +38,25 @@ public:
             j--;
         }
         return true;
+    }
+};
+
+//------------------------------------------------------------
+//code
+ 官方解析
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x < 0 || (x % 10 == 0 && x != 0)) {
+            return false;
+        }
+
+        int revertedNumber = 0;
+        while(x > revertedNumber) {
+            revertedNumber = revertedNumber * 10 + x % 10;
+            x /= 10;
+        }
+
+        return x == revertedNumber || x == revertedNumber/10;
     }
 };
